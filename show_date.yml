@@ -1,0 +1,6 @@
+- 
+  name: Show Date playbook
+  hosts: localhost
+  tasks:
+    - name: Show date
+      command: date

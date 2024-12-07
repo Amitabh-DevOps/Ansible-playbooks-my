@@ -1,0 +1,45 @@
+- 
+  name: System patching (system upgrade)
+  hosts: servers
+  become: yes
+  tasks:
+    - name: Update apt cache on Ubuntu
+      apt:
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Update dnf cache on Amazon Linux
+      dnf:
+        update_cache: yes
+      when: ansible_distribution == "Amazon"
+
+
+    - name: Upgrade systems on Ubuntu
+      apt:
+        upgrade: dist
+        state: latest
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Upgrade systems on Amazon linux
+      dnf:
+        name: "*"
+        state: latest
+      when: ansible_distribution == "Amazon"
+
+    - name: reboot systems
+      reboot:
+        reboot_timeout: 600
+        msg: "System rebooting after package upgrades"
+      when: ansible_distribution in ['Ubuntu', 'Amazon']
+
+    - name: Testing uptime of Systems
+      command: uptime
+      register: uptime_output
+      when: ansible_distribution in ['Ubuntu', 'Amazon']
+
+    - name: Display uptime
+      debug:
+        var: uptime_output.stdout_lines
+      when: ansible_distribution in ['Ubuntu', 'Amazon']
+
+

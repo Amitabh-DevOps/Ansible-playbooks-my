@@ -1,0 +1,18 @@
+- 
+  name: Install Docker on Ubuntu and Amazon linux distribution
+  hosts: servers
+  become: yes
+  tasks:
+    - name: Install docker on Ubuntu linux
+      apt:
+        name: docker.io
+        state: latest
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Install docker on Amazon linux
+      dnf:
+        name: docker
+        state: latest
+      when: ansible_distribution == "Amazon"
+
+    

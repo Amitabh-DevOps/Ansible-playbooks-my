@@ -1,0 +1,36 @@
+- 
+  name: Install nginx
+  hosts: servers
+  become: yes
+  tasks:
+    - name: nginx install on ubuntu
+      apt:
+        name: nginx
+        state: latest
+      when: ansible_distribution == "Ubuntu"
+
+    - name: nginx install on amazon linux
+      dnf:
+        name: nginx
+        state: latest
+      when: ansible_distribution == "Amazon"
+
+
+    - name: start and enable nginx
+      service: 
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: show index.html content on nginx server
+      copy:
+        src: index.html
+        dest: /var/www/html/
+      when: ansible_distribution == "Ubuntu"
+
+    - name: show index.html content on nginx server
+      copy:
+        src: index.html
+        dest: /usr/share/nginx/html/
+      when: ansible_distribution == "Amazon"
+      

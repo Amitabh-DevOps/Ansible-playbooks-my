@@ -1,0 +1,20 @@
+- 
+  name: System service
+  hosts: localhost
+  tasks:
+    - name: show date
+      command: date
+
+    - name: show RAM
+      command: free -h
+
+    - name: show disk space
+      command: df -h
+
+    - name: show user
+      command: whoami
+
+    - name: show uptime of servers
+      command: uptime
+
+
