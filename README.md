@@ -1,3 +1,5 @@
+Date : 07-12-2024
+
 ### Introduction
 
 Today’s class in **DevOps Batch-8** led by **Shubham Londhe** was a game-changer in my DevOps journey. After completing all the exercises, I am feeling incredibly confident with **Ansible**. If you're familiar with infrastructure management and automation, you’ll understand how powerful and time-saving tools like Ansible can be. Here’s a detailed breakdown of everything I worked on and learned today.
